@@ -30,7 +30,7 @@
     <div class="hero-inner">
       <h1 class="title">Join NeoOps</h1>
       <p class="subtitle">Early access waitlist.<small>No spam. We’ll only email when it matters.</small></p>
-      <form id="joinForm" action="https://formspree.io/f/mjkpnwea?redirect=https%3A%2F%2Fnuno-pereira-marques.github.io%2Feoquee-fundacao-limpa%2Fthanks.html" method="post">
+      <form id="joinForm" action="https://formspree.io/f/mjkpnwea" method="post" novalidate>
         <label class="sr-only" for="email">Email</label>
         <input id="email" name="email" type="email" placeholder="you@example.com" required />
         <button type="submit">Request Invite</button>
@@ -43,13 +43,24 @@
     <p>© 2025 <strong>eoquee — Smart Ops</strong>. All rights reserved.</p>
   </footer>
 
-  <!-- Fallback JS: caso o Formspree falhe o redirect -->
+  <!-- Submission via AJAX: força redirect local e evita a página de obrigado do Formspree -->
   <script>
-    document.getElementById('joinForm').addEventListener('submit', function(){
-      setTimeout(function(){
+    (function(){
+      const form = document.getElementById('joinForm');
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        const data = new FormData(form);
+        try{
+          await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+        }catch(e){/* silencioso */}
+        // redireciona sempre para a nossa página local
         window.location.href = 'thanks.html';
-      }, 1500);
-    });
+      });
+    })();
   </script>
 </body>
 </html>
