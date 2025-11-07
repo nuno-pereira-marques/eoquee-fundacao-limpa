@@ -33,6 +33,8 @@
       <form id="joinForm" action="https://formspree.io/f/mjkpnwea" method="post" novalidate>
         <label class="sr-only" for="email">Email</label>
         <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        <!-- Honeypot anti-spam (invisível para humanos) -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;">
         <button type="submit">Request Invite</button>
       </form>
       <p class="hint">By submitting, you agree to be contacted about NeoOps. You can unsubscribe anytime.</p>
@@ -43,21 +45,27 @@
     <p>© 2025 <strong>eoquee — Smart Ops</strong>. All rights reserved.</p>
   </footer>
 
-  <!-- Submission via AJAX: força redirect local e evita a página de obrigado do Formspree -->
+  <!-- Envio AJAX + UX + redirect forçado para thanks.html -->
   <script>
     (function(){
       const form = document.getElementById('joinForm');
+      const btn  = form.querySelector('button[type=\"submit\"]');
       form.addEventListener('submit', async function(e){
         e.preventDefault();
-        const data = new FormData(form);
+        // UX feedback e prevenção de duplo clique
+        btn.disabled = true;
+        const original = btn.textContent;
+        btn.textContent = 'Sending...';
+        setTimeout(()=>btn.textContent='Redirecting...', 600);
         try{
+          const data = new FormData(form);
           await fetch(form.action, {
             method: 'POST',
             body: data,
             headers: { 'Accept': 'application/json' }
           });
-        }catch(e){/* silencioso */}
-        // redireciona sempre para a nossa página local
+        }catch(err){/* silencioso: mesmo que falhe, seguimos para thanks */}
+        // Redireciona sempre para a página local de obrigado
         window.location.href = 'thanks.html';
       });
     })();
