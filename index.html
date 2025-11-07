@@ -3,39 +3,41 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="eoquee — Smart Ops. NeoOps: An intelligent system that works while you don’t." />
-  <meta name="theme-color" content="#004C5F" />
   <title>eoquee — Smart Ops</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    body { font-family: 'Lato', sans-serif; text-align:center; padding:2rem; color:#003A3D; }
+    .brand { font-family:'Montserrat', sans-serif; font-weight:700; color:#004C5F; }
+    .hero { margin-top:10vh; }
+    h1 { font-family:'Montserrat', sans-serif; font-size:4rem; color:#004C5F; margin-bottom:.5rem; }
+    h2 { font-weight:400; color:#3A3A3A; margin-top:0; }
+    p.subtitle { color:#666; font-size:1.1rem; margin-bottom:2rem; }
+    .actions { display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; }
+    a.button, button { font-family:'Montserrat',sans-serif; font-weight:700; border:2px solid #004C5F; border-radius:12px; padding:.9rem 1.4rem; text-decoration:none; transition:.3s; }
+    a.button.primary { background:#004C5F; color:#fff; }
+    a.button.secondary { background:none; color:#004C5F; }
+    a.button:hover { transform:translateY(-2px); }
+    header { display:flex; justify-content:space-between; align-items:center; font-family:'Montserrat',sans-serif; }
+    .topbar .brand { font-size:1.2rem; }
+    .topbar .badge { background:#59BFA3; color:#004C5F; padding:.4rem 1.2rem; border-radius:20px; font-weight:700; text-decoration:none; }
+  </style>
 </head>
 <body>
-  <header class="topbar" aria-label="Site header">
-    <div class="brand">
-      <span class="dot" aria-hidden="true">•</span>
-      <span class="name">eoquee</span>
-      <span class="divider">—</span>
-      <span class="unit">Smart Ops</span>
-    </div>
-    <span class="badge" aria-label="Coming Soon">COMING SOON</span>
+  <header class="topbar">
+    <div class="brand">• eoquee — Smart Ops</div>
+    <a class="badge" href="#" aria-label="Coming Soon">COMING SOON</a>
   </header>
 
-  <main class="hero" id="top">
-    <div class="hero-inner">
-      <h1 class="title">NeoOps</h1>
-      <p class="kicker">Automation is about to get personal.</p>
-      <p class="subtitle">An intelligent system that works while you don’t.</p>
-
-      <div class="cta-row">
-        <a class="btn btn-solid" href="mailto:contact@eoquee.com">contact@eoquee.com</a>
-        <a class="btn btn-outline" href="join.html" aria-label="Join NeoOps">Join NeoOps</a>
-      </div>
+  <main class="hero">
+    <h1>NeoOps</h1>
+    <h2>Automation is about to get personal.</h2>
+    <p class="subtitle">An intelligent system that works while you don’t.</p>
+    <div class="actions">
+      <a href="mailto:contact@eoquee.com" class="button primary">contact@eoquee.com</a>
+      <a href="join.html" class="button secondary">Join NeoOps</a>
     </div>
   </main>
-
-  <footer class="footer">
-    <p>© 2025 <strong>eoquee — Smart Ops</strong>. All rights reserved.</p>
-  </footer>
 </body>
 </html>
