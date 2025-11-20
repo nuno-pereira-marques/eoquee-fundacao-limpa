@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Join NeoOps — eoquee</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .hero .subtitle small{ display:block; opacity:.75; margin-top:.35rem; }
+    form{ display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; margin-top:1rem; }
+    input[type="email"]{ padding:.9rem 1rem; border:2px solid var(--teal); border-radius:12px; min-width: min(420px, 92vw); font: inherit; }
+    button{ border:2px solid var(--teal); background: var(--teal); color:#fff; padding:.9rem 1.2rem; border-radius:12px; font-weight:800; }
+    .hint{ margin-top:.75rem; color:#666; font-size:.95rem; }
+  </style>
+</head>
+<body>
+  <header class="topbar" aria-label="Site header">
+    <div class="brand">
+      <span class="dot" aria-hidden="true">•</span>
+      <span class="name">eoquee</span>
+      <span class="divider">—</span>
+      <span class="unit">Smart Ops</span>
+    </div>
+    <a class="badge" href="index.html" aria-label="Back">BACK</a>
+  </header>
+
+  <main class="hero">
+    <div class="hero-inner">
+      <h1 class="title">Join NeoOps</h1>
+      <p class="subtitle">Early access waitlist.<small>No spam. We’ll only email when it matters.</small></p>
+      <form id="joinForm" action="https://formspree.io/f/mjkpnwea" method="post" novalidate>
+        <label class="sr-only" for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        <!-- Honeypot anti-spam (invisível para humanos) -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;">
+        <button type="submit">Request Invite</button>
+      </form>
+      <p class="hint">By submitting, you agree to be contacted about NeoOps. You can unsubscribe anytime.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 <strong>eoquee — Smart Ops</strong>. All rights reserved.</p>
+  </footer>
+
+  <!-- Envio AJAX + UX + redirect forçado para thanks.html -->
+  <script>
+    (function(){
+      const form = document.getElementById('joinForm');
+      const btn  = form.querySelector('button[type=\"submit\"]');
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        // UX feedback e prevenção de duplo clique
+        btn.disabled = true;
+        const original = btn.textContent;
+        btn.textContent = 'Sending...';
+        setTimeout(()=>btn.textContent='Redirecting...', 600);
+        try{
+          const data = new FormData(form);
+          await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+        }catch(err){/* silencioso: mesmo que falhe, seguimos para thanks */}
+        // Redireciona sempre para a página local de obrigado
+        window.location.href = 'thanks.html';
+      });
+    })();
+  </script>
+</body>
+</html>
