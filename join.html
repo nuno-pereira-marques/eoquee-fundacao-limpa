@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Join NeoOps</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, sans-serif; background:#FFFFFF; padding:40px; color:#004C5F;}
+h1 {font-size:28px; margin-bottom:10px;}
+.container {max-width:420px; margin:auto;}
+label {font-size:14px; color:#3A3A3A;}
+input[type=email] {
+  width:100%; padding:14px; margin-top:6px; margin-bottom:20px;
+  border:1px solid #59BFA3; border-radius:6px; font-size:16px;
+}
+button {
+  background:#004C5F; border:none; padding:14px 22px; color:white;
+  border-radius:6px; font-size:16px; width:100%; cursor:pointer;
+}
+button:hover {background:#003845;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Join NeoOps</h1>
+<form action="https://formspree.io/f/yourendpoint" method="POST">
+<label>Email address</label>
+<input id="email" name="email" type="email" required placeholder="your@email.com">
+<button type="submit">Join</button>
+</form>
+</div>
+
+<script>
+document.querySelector("form").addEventListener("submit", function(e){
+    var email = document.getElementById("email").value;
+    if(!email || !email.includes("@")){
+        e.preventDefault();
+        alert("Please enter a valid email address.");
+        return false;
+    }
+    // Allow Formspree submit, then redirect
+    setTimeout(function(){
+        window.location.href = "https://eoquee.com/thanks.html";
+    }, 300);
+});
+</script>
+</body>
+</html>
