@@ -11,12 +11,10 @@
     .hero .subtitle small{ display:block; opacity:.75; margin-top:.35rem; }
     form{ display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; margin-top:1rem; }
     input[type="email"]{ padding:.9rem 1rem; border:2px solid var(--teal); border-radius:12px; min-width: min(420px, 92vw); font: inherit; }
-    button{ border:2px solid var(--teal); background: var(--teal); color:#fff; padding:.9rem 1.2rem; border-radius:12px; font-weight:800; cursor:pointer; }
-    button[disabled]{ opacity:.6; cursor:not-allowed; }
+    button{ border:2px solid var(--teal); background: var(--teal); color:#fff; padding:.9rem 1.2rem; border-radius:12px; font-weight:800; }
     .hint{ margin-top:.75rem; color:#666; font-size:.95rem; }
   </style>
 </head>
-
 <body>
   <header class="topbar" aria-label="Site header">
     <div class="brand">
@@ -35,18 +33,12 @@
 
       <form id="joinForm" action="https://formspree.io/f/mjkpnwea" method="post" novalidate>
         <label class="sr-only" for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required />
 
-        <input id="email"
-               name="email"
-               type="email"
-               placeholder="you@example.com"
-               required />
+        <!-- Invisible honeypot -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;">
 
-        <!-- Honeypot anti-spam -->
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
-               style="position:absolute;left:-9999px;">
-
-        <button type="submit" id="submitBtn">Request Invite</button>
+        <button type="submit">Request Invite</button>
       </form>
 
       <p class="hint">By submitting, you agree to be contacted about NeoOps. You can unsubscribe anytime.</p>
@@ -57,49 +49,44 @@
     <p>© 2025 <strong>eoquee — Smart Ops</strong>. All rights reserved.</p>
   </footer>
 
-  <!-- Validação + UX + redirect -->
+  <!-- Email validation + UX + redirect -->
   <script>
     (function(){
-      const form  = document.getElementById('joinForm');
+      const form = document.getElementById('joinForm');
       const email = document.getElementById('email');
-      const btn   = document.getElementById('submitBtn');
+      const btn  = form.querySelector('button[type="submit"]');
 
-      function isValidEmail(e){
-        const re = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-        return re.test(String(e).toLowerCase());
-      }
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
 
-      form.addEventListener('submit', async function(ev){
-        ev.preventDefault();
-
+        // Validation
         const value = email.value.trim();
-
-        // Validar email
-        if(!value || !isValidEmail(value)){
+        if(!value || !value.includes('@') || !value.includes('.')){
           alert("Please enter a valid email address.");
-          email.focus();
           return;
         }
 
-        // UX
+        // Prevent double click
         btn.disabled = true;
-        btn.textContent = "Sending...";
-        setTimeout(()=> btn.textContent="Redirecting...", 600);
+        const original = btn.textContent;
+        btn.textContent = "Sending…";
 
-        // Submit Formspree seguro
-        try {
+        try{
           const data = new FormData(form);
           await fetch(form.action, {
             method: 'POST',
             body: data,
             headers: { 'Accept': 'application/json' }
           });
-        } catch(e){
-          // Fail silently — redirect anyway
+        }catch(err){
+          /* Mesmo que falhe, continuamos */
         }
 
-        // Redirect final
-        window.location.href = "thanks.html";
+        // Redirect to thanks
+        btn.textContent = "Redirecting…";
+        setTimeout(() => {
+          window.location.href = "thanks.html";
+        }, 400);
       });
     })();
   </script>
