@@ -1,1 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Ops Starter — eoquee</title>
 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    :root{
+      --petro:#004C5F;
+      --dark:#3A3A3A;
+      --teal:#59BFA3;
+    }
+    *{box-sizing:border-box}
+    body{ font-family:'Lato',sans-serif; color:#003A3D; margin:0; }
+
+    header.topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px 24px;
+      font-family:'Montserrat',sans-serif;
+    }
+    .topbar .brand{ font-weight:700; color:var(--petro); }
+    .topbar .badge{
+      background:var(--teal);
+      color:var(--petro);
+      padding:.45rem 1.1rem;
+      border-radius:999px;
+      font-weight:700;
+      text-decoration:none;
+    }
+
+    main.page{
+      min-height:calc(100vh - 96px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px 24px;
+    }
+
+    .wrap{
+      width:100%;
+      max-width:980px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .kicker{
+      font-family:'Montserrat',sans-serif;
+      font-weight:700;
+      color:var(--petro);
+      opacity:.9;
+      letter-spacing:.02em;
+    }
+
+    h1{
+      font-family:'Montserrat',sans-serif;
+      font-weight:800;
+      font-size:clamp(34px,5.8vw,56px);
+      color:var(--petro);
+      margin:0;
+      line-height:1.05;
+    }
+
+    p.lead{
+      margin:0;
+      color:#4b4b4b;
+      font-size:clamp(16px,1.7vw,19px);
+      line-height:1.45;
+      max-width:70ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      margin-top:10px;
+    }
+
+    .card{
+      border:1px solid rgba(0,76,95,.14);
+      border-radius:18px;
+      padding:18px 18px 16px;
+      background:#fff;
+    }
+
+    h2{
+      font-family:'Montserrat',sans-serif;
+      font-weight:800;
+      font-size:18px;
+      color:#0F3E46;
+      margin:0 0 10px;
+    }
+
+    ul{
+      margin:0;
+      padding-left:18px;
+      color:#2f2f2f;
+      line-height:1.55;
+    }
+
+    .price{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      margin-top:2px;
+      color:#2f2f2f;
+    }
+    .price strong{
+      font-family:'Montserrat',sans-serif;
+      color:var(--petro);
+      font-size:22px;
+    }
+    .micro{
+      color:#666;
+      font-size:14px;
+      line-height:1.35;
+    }
+
+    .actions{
+      display:flex;
+      gap:.8rem;
+      flex-wrap:wrap;
+      margin-top:10px;
+      align-items:center;
+    }
+
+    a.button{
+      font-family:'Montserrat',sans-serif;
+      font-weight:700;
+      border:2px solid var(--petro);
+      border-radius:12px;
+      padding:.7rem 1.25rem;
+      text-decoration:none;
+      transition:.2s;
+      display:inline-block;
+    }
+    a.button.primary{ background:var(--petro); color:#fff; }
+    a.button.secondary{ background:transparent; color:var(--petro); }
+    a.button:hover{ transform:translateY(-2px); }
+
+    details{
+      border-top:1px solid rgba(0,76,95,.12);
+      padding-top:12px;
+      margin-top:8px;
+    }
+    details summary{
+      cursor:pointer;
+      font-family:'Montserrat',sans-serif;
+      font-weight:700;
+      color:#0F3E46;
+      outline:none;
+    }
+    details p{
+      margin:10px 0 0;
+      color:#4b4b4b;
+      line-height:1.5;
+    }
+
+    .foot{
+      margin-top:10px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      color:#666;
+      font-size:14px;
+    }
+    .foot a{ color:var(--petro); text-decoration:none; font-weight:700; }
+
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">• eoquee — Smart Ops</div>
+    <a class="badge" href="index.html" aria-label="Back to Home">HOME</a>
+  </header>
+
+  <main class="page">
+    <div class="wrap">
+      <div class="kicker">Smart Ops Starter</div>
+
+      <h1>An intelligent system that works while you don’t.</h1>
+      <p class="lead">
+        Build a simple operational system in <strong>60 minutes</strong>.
+        No hype. No tools overload. Just execution.
+      </p>
+
+      <div class="grid">
+        <section class="card">
+          <h2>What you get</h2>
+          <ul>
+            <li>The Smart Ops System (Input → Decision → Action)</li>
+            <li>5 structural prompts (not “pretty questions”)</li>
+            <li>2 simple templates to run the system</li>
+            <li>A real example (before/after)</li>
+            <li>Instant access</li>
+          </ul>
+
+          <div class="actions">
+            <!-- TODO: replace # with payment link (Stripe/Gumroad/LemonSqueezy) -->
+            <a href="#" class="button primary">Get Smart Ops Starter — 19€</a>
+            <a href="mailto:contact@eoquee.com" class="button secondary">Questions? Email us</a>
+          </div>
+
+          <div class="micro">
+            Not a course. Not passive income. A practical system you can reuse forever.
+          </div>
+        </section>
+
+        <aside class="card">
+          <h2>Who it’s for</h2>
+          <ul>
+            <li>Busy professionals</li>
+            <li>Builders and operators</li>
+            <li>People who want fewer decisions</li>
+          </ul>
+
+          <div style="height:10px"></div>
+
+          <h2>Price</h2>
+          <div class="price">
+            <strong>19€</strong>
+            <div class="micro">One-time. No subscription.</div>
+          </div>
+
+          <details>
+            <summary>Is this a course?</summary>
+            <p>No. It’s a short guide + templates to build a working system.</p>
+          </details>
+
+          <details>
+            <summary>Do I need technical skills?</summary>
+            <p>No. If you can follow a checklist, you can set it up.</p>
+          </details>
+
+          <details>
+            <summary>Is this “passive income”?</summary>
+            <p>No. It’s leveraged execution: you set it up once, then the system reduces friction every day.</p>
+          </details>
+        </aside>
+      </div>
+
+      <div class="foot">
+        <div>© eoquee — Smart Ops</div>
+        <div><a href="index.html">Back to home</a> · <a href="join.html">Join NeoOps</a></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
